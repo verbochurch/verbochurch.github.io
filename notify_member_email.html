@@ -1,0 +1,23 @@
+
+        <body>
+        <h2>Hello from Verbo Velocity</h2>
+        <h3>We miss you!</h3>
+        <p>We have noticed you have missed  <b>{{ num_misses }}</b> consecutive meetings </p>
+        <p>Would you like to contact your homegroup leader?</p>
+        <p>Homegroup Leader Info<p>
+            <table>
+            <tr>
+                <th>Name</th>
+                <th>Phone</th>
+                <th>Email</th>
+            </tr>
+            <tr>
+            <th>
+                {{ leader_name }}
+            </th>
+                <th> {{ leader_phone }}</th>
+                <th> {{  leader_email }}</th>
+            </tr>
+        </table>
+        <h3> We hope to see you again!</h3>
+        </body>

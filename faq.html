@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+{% block title %}FAQ{% endblock %}
+
+{% block content %}
+<body class="faq">
+<div class="jumbotron">
+<h2 class="head-style"> Frequently Asked Questions</h2>
+</div>
+
+ {% if current_user.role == 'homegroup_leader' %}
+
+
+    <h3><b>How do I add a person to a homegroup?</b></h3>
+    <p>Click on the "Members" tab on the navigation bar, and then click "Add Member" at the top of the page.</p><br>
+    <h3><b>How do I take attendance?</b></h3>
+    <p>Click on "Attendance" tab on the navigation bar.
+        Select the current date and time and click "Take Attendance".
+        Click the check boxes next to a person's name if they are present. Leave blank if absent.
+    </p><br>
+    <h3><b>How do I edit/view past attendance reports?</b></h3>
+    <p>On the "Attendance" page, click on "View Attendance History." Click "Edit" for the report you would like to view.</p><br>
+    <h3><b>How do I edit my homegroup information?</b></h3>
+    <p>Click on the "Homegroup Profile" tab, and edit your homegroup information using the form.</p><br>
+
+
+ {% endif %}
+{% if current_user.role == 'admin' %}
+    <h3><b>How do I add a person to a homegroup?</b></h3>
+    <p>Click on the "Homegroups" tab on the navigation bar. Select the "Members" button of the desired homegroup. Click "Add Member" at the top of the page.</p><br>
+    <h3><b>How do I delete a homegroup?</b></h3>
+    <p>Click on "Homegroups" tab. Select the "Delete" button of the desired homegroup. This will temporary deactivate the homegroup. To reactivate a homegroup, click on "Show Inactive Homegroups" at the top of the page. Select "Reactivate" on the desired homegroup.</p><br>
+    <h3><b>How do I view all members of all homegroups?</b></h3>
+    <p>Click on "Members" tab. Here, you can edit, create role, or remove a member.</p><br>
+    <h3><b>How do I search by member demographics?</b></h3>
+    <p>On the "All Members" page, click the "Advanced Search" button at the top. Click on the criteria you would like to filter by, and click "Query." This will display a list of members who meet the desired criteria. From here, you can email these members or download a report of the members.</p><br>
+{% endif %}
+{% if current_user.role != 'admin' %}
+{% if current_user.role != 'homegroup_leader' %}
+    <h3><b>How do I join a homegroup?</b></h3>
+    <div> Check out the map on the homepage and find
+        homegroups near you by typing in your address.
+        Click <a class="link-color" href="{{url_for( 'index' )}}">here</a>
+        to access the map. </div>
+    <br>
+    <h3><b>What type of homegroup should I join?</b></h3>
+    <div>You can filter through certain demographics on the home page.</div>
+    <br>
+
+    <h3><b>Who is the best teacher?</b></h3>
+    <div>Obvious.</div>
+
+{% endif %}
+{% endif %}
+    <h4>Other questions? <a class="link-color" href="mailto:verbovelocity@gmail.com?Subject=Website Support" target="_top">Contact Our Support Team</a></h4>
+
+</body>
+{% endblock %}

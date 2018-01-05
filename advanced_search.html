@@ -1,0 +1,206 @@
+{%  extends "base.html" %}
+
+{% block title %} Advanced Search {% endblock %}
+{% block content %}
+
+    <style type="text/css">
+        #element1 {display:inline-block;margin-right:10px;}
+        #element2 {display:inline-block;}
+    </style>
+
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col form-group pull-right">
+            <div class="inner-addon right-addon">
+                <i class="glyphicon glyphicon-search"></i>
+                <input type="text" class="search form-control" placeholder="Search">
+            </div>
+        </div>
+        <div class="col form-group pull-right">
+
+            <div class="section section--sade">
+                Show Inactive Members
+                   <div class="toggle-button toggle-button--sade">
+                       <input id="checkbox1" type="checkbox" checked=''>
+                       <label for="checkbox1"></label>
+                       <div class="toggle-button__icon"></div>
+                   </div>
+            </div>
+        </div>
+    </div>
+</div>
+ <div class="container">
+
+				<div class="main-login main-center">
+                    <h1 class="head-style">Advanced Search</h1>
+                             <div class="row">
+        <div class="col-xs-2 col-lg-1">
+            <div class="section section--sade">
+               <div class="toggle-button toggle-button--sade">
+                   <input class="gender searchToggle" id="toggleButton1" type="checkbox">
+                   <label for="toggleButton1"></label>
+                   <div class="toggle-button__icon"></div>
+               </div>
+            </div>
+        </div>
+            <div class="col-xs-10 col-lg-11">
+                <div class="form-group">
+                    <label for="gender"> Gender</label>
+                    <select class="form-control input-lg searchDropdown" id="gender">
+                        <option value="M">Male</option>
+                        <option value="F">Female</option>
+                    </select>
+                </div>
+            </div>
+    </div>
+
+                    <div class="row">
+        <div class="col-xs-2 col-lg-1">
+            <div class="section section--sade">
+               <div class="toggle-button toggle-button--sade">
+                   <input class="searchToggle ageCheckbox" id="toggleButton2" type="checkbox">
+                   <label for="toggleButton2"></label>
+                   <div class="toggle-button__icon"></div>
+               </div>
+            </div>
+        </div>
+            <div class="col-xs-10 col-lg-11">
+                 <div class="form-group">
+                <label for="age"> Age</label>
+            <select class="form-control input-lg searchDropdown" id="age">
+                <option value="children">Children</option>
+                <option value="youth">Youth</option>
+                <option value="teen">Teen</option>
+                <option value="youngAdult">Young Adult</option>
+                <option value="adult">Adult</option>
+                <option value="senior">Senior</option>
+            </select>
+            </div>
+
+            </div>
+    </div>
+                     <div class="row">
+            <div class="col-xs-2 col-lg-1">
+                <div class="section section--sade">
+                   <div class="toggle-button toggle-button--sade">
+                       <input class="searchToggle maritalCheckbox" id="toggleButton3" type="checkbox">
+                       <label for="toggleButton3"></label>
+                       <div class="toggle-button__icon"></div>
+                   </div>
+                </div>
+            </div>
+                <div class="col-xs-10 col-lg-11">
+                     <div class="form-group">
+                         <label for="age">Marital Status</label>
+                        <select class="form-control input-lg searchDropdown" id="marital">
+                            <option value="1">Married</option>
+                            <option value="0">Not Married</option>
+                        </select>
+                        </div>
+                </div>
+        </div>
+
+    <div class="row">
+            <div class="col-xs-2 col-lg-1">
+                <div class="section section--sade">
+                   <div class="toggle-button toggle-button--sade">
+                       <input class="baptism searchToggle" id="toggleButton4" type="checkbox">
+                       <label for="toggleButton4"></label>
+                       <div class="toggle-button__icon"></div>
+                   </div>
+                </div>
+            </div>
+                <div class="col-xs-10 col-lg-11">
+                     <div class="form-group">
+                         <label for="age">Baptism Status</label>
+                        <select class="form-control input-lg searchDropdown" id="baptism">
+                            <option value="1">Baptised</option>
+                            <option value="0">Not Baptised</option>
+                        </select>
+                        </div>
+                </div>
+        </div>
+
+
+
+
+			</div>
+		</div>
+
+
+    <div id="element1">
+        <h1> Search Results</h1>
+    </div>
+
+    <div id="element2">
+        <a id="contact-button" href="mailto:{{ emailList }}" class="btn btn-default">
+            <span class="glyphicon glyphicon-envelope"></span>
+                Contact
+        </a>
+    </div>
+
+
+<span class="counter pull-right"></span>
+<table class="table table-striped table-bordered table-hover results">
+    <thead>
+    <tr>
+        <th> First Name</th>
+        <th> Last Name</th>
+        <th> </th>
+        <th class="content"> Active? </th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for member in members %}
+    <tr>
+        <td> {{ member.first_name }}</td>
+        <td> {{ member.last_name }}</td>
+        <td class="genderData" hidden>{{ member.gender }}</td>
+        <td class="baptismData" hidden>{{member.baptism_status}}</td>
+        <td class="ageData" hidden>{{member.age}}</td>
+        <td class="maritalData" hidden>{{member.marital_status }}</td>
+        <td class="email" hidden>{{member.email }}</td>
+
+        <td>
+        <a href="{{url_for('edit_member', member_id = member.id)}}" class="btn btn-info btn-sm">
+          <span class="glyphicon glyphicon-pencil"></span> Edit
+        </a>
+            <a href="{{url_for('create_user', member_id = member.id)}}" class="btn btn-warning btn-sm">
+          <span class="glyphicon glyphicon-plus"></span> Role
+        </a>
+        <a href="{{url_for('deactivate_member', member_id = member.id)}}" class="btn btn-danger btn-sm">
+          <span class="glyphicon glyphicon-trash"></span> Remove
+        </a>
+        </td>
+     <td class="content"> <span style="color:green" class="glyphicon glyphicon-ok"></span></td>
+
+    </tr>
+    {% endfor %}
+
+        {%  for inactiveMember in inactiveMembers %}
+            <tr>
+            <td> {{ inactiveMember.first_name }}</td>
+            <td> {{ inactiveMember.last_name }}</td>
+            <td class="genderData" hidden>{{ inactiveMember.gender }}</td>
+            <td class="baptismData" hidden>{{inactiveMember.baptism_status}}</td>
+            <td class="ageData" hidden>{{inactiveMember.age}}</td>
+            <td class="maritalData" hidden>{{inactiveMember.marital_status }}</td>
+            <td class="email" hidden>{{inactiveMember.email }}</td>
+
+            <td>
+            <a href="{{url_for('edit_member', member_id = inactiveMember.id)}}" class="btn btn-info btn-sm">
+              <span class="glyphicon glyphicon-pencil"></span> Edit
+            </a>
+            <a href="{{url_for('reactivate_member', member_id = inactiveMember.id)}}" class="btn btn-success btn-sm">
+              <span class="glyphicon glyphicon-plus"></span> Reactivate
+            </a>
+            </td>
+              <td class="content">  <span  style="color:red" class="glyphicon glyphicon-remove"></span> </td>
+        {% endfor %}
+
+    </tbody>
+</table>
+
+</div>
+{% endblock %}

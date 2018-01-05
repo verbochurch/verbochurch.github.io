@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block title %}Log In{% endblock %}
+
+{% block content %}
+    <style>
+        body, html {
+            height: 100%;
+
+        }
+    </style>
+    <div class="container">
+        <div class="row main">
+            <div class="main-login main-center">
+                <h1 class="head-style">Log In</h1>
+
+                <form method="POST">
+                    {{ form.csrf_token }}
+
+                    <p>{{ form.email.label }}{{ form.email(class='form-control') }}</p>
+                    {% if form.email.errors %}
+                        <div class="alert alert-warning">
+                            Please enter a valid E-mail
+                        </div>
+                    {% endif %}
+                    <p>{{ form.password.label }}{{ form.password(class="form-control") }}</p><br>
+                    {% if form.password.errors %}
+                        <div class="alert alert-warning">
+                            Please enter a valid Password
+                        </div>
+                    {% endif %}
+                    <p>{{ form.submit(class_='btn btn-primary btn-lg btn-block', style="display: block; width: 100%; font-family: 'Questrial', sans-serif;") }}</p>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

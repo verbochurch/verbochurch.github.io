@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ heading_text }}{% endblock %}
+
+{% block content %}
+    <div class="container">
+			<div class="row main">
+				<div class="main-login main-center">
+                     <h2 class="head-style" > {{ heading_text }}</h2>
+					    <form method = "POST" role="form" data-toggle="validator">
+
+						<div class="form-group">
+                            {{ form.csrf_token }}
+                            <p> {{form.first_name.label}} {{form.first_name(class_='form-control')}}</p>
+                            {% if form.first_name.errors %}
+                                <div class="alert alert-warning">
+                                    Invalid First Name
+                                 </div>
+                            {% endif %}
+						</div>
+
+						<div class="form-group">
+                            <p> {{form.last_name.label}} {{form.last_name(class_='form-control')}}</p>
+                            {% if form.last_name.errors %}
+                                  <div class="alert alert-warning">
+                                    Invalid Last Name
+                                 </div>
+                            {% endif %}
+						</div>
+
+						<div class="form-group">
+                             <p> {{form.email.label(for="inputEmail", class_="control-label")}} {{form.email(class_='form-control', type="email", id="inputEmail", placeholder="Email", dataerror="Bruh, that email address is invalid")}}</p>
+                            {% if form.email.errors %}
+                                <div class="alert alert-warning">
+                                    Invalid Email Address
+                                 </div>
+                            {% endif %}
+						</div>
+
+						<div class="form-group">
+							 <p> {{form.phone_number.label}} {{form.phone_number(class_='form-control', placeholder="ex: 224-656-8205")}}</p>
+                                {% if form.phone_number.errors %}
+                                    <div class="alert alert-warning">
+                                        Invalid Phone Number
+                                     </div>
+                                {% endif %}
+						</div>
+                     <div class="row">
+                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                <p> {{form.gender.label}} {{form.gender(class_='form-control')}}</p>
+                            </div>
+                        </div>
+
+
+                         <div class="row">
+                            <div class="col-lg-6 col-md-6 col-sm-12">
+                               <p> <label>Birthday</label><br> <input type="date" style="color: black" name="Birthday" value="{{ bDay }}" required/></p>
+                            </div>
+                         </div>
+
+                         <div class="row">
+                            <div class="col-lg-6 col-md-6 col-sm-12">
+                               <p> {{form.baptism_status.label}} {{form.baptism_status(class_='form-control')}}</p>
+                            </div>
+                         </div>
+
+                        <div class="row">
+                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                <p> <label>Join Date</label><br> <input type="date" style="color: black" name="JoinDate" value="{{ joinDay }}" required/></p>
+                            </div>
+                        </div><br>
+
+						<div class="form-group ">
+                              <p> {{ form.submit(class_='btn btn-primary btn-lg btn-block', style="display: block; width: 100%; font-family: 'Questrial', sans-serif;")}}</p>
+						</div>
+
+					</form>
+				</div>
+			</div>
+		</div>
+
+{% endblock %}

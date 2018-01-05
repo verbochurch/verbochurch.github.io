@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <title>Info windows</title>
+    <style>
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+      #map {
+        height: 100%;
+      }
+      /* Optional: Makes the sample page fill the window. */
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="map"></div>
+    <script>
+
+      // This example displays a marker at the center of Australia.
+      // When the user clicks the marker, an info window opens.
+
+
+
+
+      function initMap(position) {
+          var upland = {lat: 40.4756, lng: -85.4944};
+          var locations = [];
+          var tmp_locations = [];
+          {% for homegroup in homegroups  %}
+              tmp_locations = [];
+              tmp_locations.push({{homegroup.latitude}});
+              tmp_locations.push({{homegroup.longitude}});
+              tmp_locations.push("{{homegroup.name}}");
+              tmp_locations.push("{{homegroup.description}}");
+              tmp_locations.push("{{homegroup.location}}");
+              tmp_locations.push("{{ homegroup.first_name }}")
+              tmp_locations.push("{{ homegroup.last_name }}")
+              tmp_locations.push("{{ homegroup.phone_number }}")
+              tmp_locations.push("{{ homegroup.email }}")
+              locations.push(tmp_locations);
+          {% endfor %}
+
+          var map = new google.maps.Map(document.getElementById('map'), {
+              zoom: 6
+          });
+
+
+        if (parent.document.getElementById("zip").value){
+             var geocoder = new google.maps.Geocoder();
+             geocodeAddress(geocoder, map);
+
+      }  else {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function (position) {
+                    initialLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+                    map.setCenter(initialLocation);
+                });
+            }
+        }
+
+        var infowindow = new google.maps.InfoWindow({
+          content: contentString
+        });
+
+
+
+        for (var i = 0; i < locations.length; i++) {
+          var marker = new google.maps.Marker({
+            position: new google.maps.LatLng(locations[i][0], locations[i][1]),
+            map: map
+          });
+          var contentString = '<div id="locationContent">' + '<h2>' + locations[i][2] + '</h2><p><b>Description:</b> '+ locations[i][3]  + '<br> <b>Location:</b> ' + locations[i][4] ;
+          if (locations[i][5] != "None"){
+              contentString = contentString + ' <br><b>Homegroup Leader:</b> ' + locations[i][5] + " " + locations[i][6] + ' <br><b> Phone Number: </b> <a href="tel:' + locations[i][7] + '">' + locations[i][7] + '</a> <br> <b> Email: </b><a href="mailto:' + locations[i][8] + '">' + locations[i][8] +'</a>';
+          }
+          contentString = contentString + '</p></div>';
+          createInfoWindow(marker, contentString);
+        }
+
+
+        var infoWindow = new google.maps.InfoWindow();
+        function createInfoWindow(marker, popupContent) {
+        google.maps.event.addListener(marker, 'click', function () {
+            infoWindow.setContent(popupContent);
+            infoWindow.open(map, marker);
+        });
+    }
+      }
+       function geocodeAddress(geocoder, resultsMap) {
+        var address = parent.document.getElementById('zip').value;
+        geocoder.geocode({'address': address}, function(results, status) {
+          if (status === 'OK') {
+            resultsMap.setCenter(results[0].geometry.location);
+            var marker = new google.maps.Marker({
+              map: resultsMap,
+              position: results[0].geometry.location,
+                icon: new google.maps.MarkerImage('//maps.gstatic.com/mapfiles/mobile/mobileimgs2.png',
+                                                    new google.maps.Size(22,22),
+                                                    new google.maps.Point(0,18),
+                                                    new google.maps.Point(11,11)),
+                shadow: null,
+                zIndex: 999
+
+            });
+          } else {
+            alert('Geocode was not successful for the following reason: ' + status);
+          }
+        });
+
+      }
+    </script>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBdgAhgOhlbwpsyLzH1ESO_KBxwQi-9rUQ&callback=initMap">
+    </script>
+  </body>
+</html>

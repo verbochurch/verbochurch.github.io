@@ -1,0 +1,8 @@
+<html>
+        <body>
+        <h2>User Account Created for Verbo Velocity</h2>
+        <p><b>Email:</b> {{ email }} </p>
+        <p><b>Temporary password:</b> {{password}}</p>
+        <a href="{{url_for('update_user', user_id=user_id)}}"><p>Click here to change your password:</p></a>
+        </body>
+</html>

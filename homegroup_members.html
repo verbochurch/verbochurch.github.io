@@ -1,0 +1,94 @@
+{%  extends "base.html" %}
+
+{% block title %} Home Group Members {% endblock %}
+{% block content %}
+
+<script>
+  function emailHomegroup() {
+      console.log("hi")
+      console.log({{ homegroupEmails }})
+    email = {{ homegroupEmails }};
+    window.location.href = "mailto:" + email ;
+  }
+</script>
+
+<div class="container-fluid">
+<h1 class="head-style">Home Group Members</h1>
+    <br>
+    <div class="row">
+        <div class="col form-group pull-right">
+            <div class="inner-addon right-addon">
+                <i class="glyphicon glyphicon-search"></i>
+                <input type="text" class="search form-control" placeholder="Search">
+            </div>
+        </div>
+        <div class="col form-group pull-left">
+            <a href="{{url_for('member_search', homegroup_id = currentHomegroup.id)}}" class="btn btn-success">
+                <span class="glyphicon glyphicon-plus"></span>
+                Add Member
+             </a>
+        </div>
+        <div class="col form-group pull-left">
+            <a href="mailto:{{ emails }}" class="btn btn-default">
+                <span class="glyphicon glyphicon-envelope"></span>
+                Email Group
+            </a>
+        </div>
+    </div>
+</div>
+
+<span class="counter pull-right"></span>
+<table class="table table-striped table-bordered table-hover results">
+    <thead>
+    <tr>
+        <th> First Name</th>
+        <th> Last Name</th>
+        <th> </th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for member in homegroup %}
+    <tr>
+        <td> {{ member.first_name }}</td>
+        <td> {{ member.last_name }}</td>
+        <td>
+        <a href="{{url_for('edit_member', member_id = member.id, homegroup_id = currentHomegroup.id)}}" class="btn btn-info btn-sm">
+          <span class="glyphicon glyphicon-pencil"></span> Edit
+        </a>
+            <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#confirmModal" data-url="{{url_for('remove_member', member_id = member.id, homegroup_id = currentHomegroup.id)}}" data-firstname="{{ member.first_name }}" data-lastname="{{ member.last_name }}">
+                    <span class="glyphicon glyphicon-trash"></span>
+                    Remove</button>
+
+        </td>
+    </tr>
+    {% endfor %}
+
+
+        <div class="modal fade" id="confirmModal" tabindex="-1" role="dialog" aria-labelledby="confirmModalLabel">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title" id="confirmModalLabel">Confirm</h4>
+              </div>
+
+              <div class="modal-body">
+                    Text here will be overridden :D
+              </div>
+              <div class="modal-footer">
+                        <a href="#0" id="modal-confirm"><button type="button" class="btn btn-primary">
+                            Confirm
+                                </button>  </a>
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+    </tbody>
+</table>
+
+</div>
+{% endblock %}

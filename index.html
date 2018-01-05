@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+
+{% block title %}Home Group Locator{% endblock %}
+
+{% block content %}
+    <style>
+
+    .main-center{
+
+ 	max-width: 1300px;
+
+}
+    </style>
+
+    <script>
+    function resize_iframe(){
+        document.getElementById('mapIframe').style.height = document.body.scrollHeight  / 1.75 + 'px';
+    }
+
+    function map_zip(){
+        var iframe = document.getElementById('mapIframe');
+        iframe.src = iframe.src;
+    }
+  window.onresize = function(){
+        resize_iframe();
+  }
+  window.onload = function(){
+    resize_iframe();
+  }
+</script>
+    <div class="container bg-overlay">
+	<div class="row text-center">
+        <div class="verbobox">
+            <div style="font-weight:300; font-size:375%; line-height:45px;">VERBO CRISTIANA</div>
+            <div style="font-weight:800; font-size:300%">HOME GROUP FINDER</div>
+        </div>
+        <br><br>
+        <button type="button" class="btn findahomegroupbtn">FIND A HOME GROUP</button>
+	</div>
+</div>
+
+<br><br>
+
+ <div class="container">
+
+	<div class="main-login main-center">
+     <h2>Find A Home Group  </h2>
+    <div class = "row">
+        <div class = "col-md-4">
+        <input type="text"  id="zip" class = "form-control" placeholder = "Enter Zip Code or Address"></input>
+           </div>
+            <div class="col-md-2"><button class="btn btn-info" onclick="map_zip()"> Search </button></div><br><br>
+
+        </div><br><br>
+                     <div class = "row">
+        <iframe id="mapIframe" class="embed-responsive-item" width="100%"src="../../map">
+
+     </iframe>
+    </div>
+ </div>
+
+    <br>
+
+
+{% endblock %}

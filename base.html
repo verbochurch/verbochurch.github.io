@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<link href="https://fonts.googleapis.com/css?family=Lato:300,300i,400,400i,700,700i,900,900i" rel="stylesheet">
+
+
+
+    <meta charset="UTF-8">
+    <title>{% block title %}My Title{% endblock %}</title>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'>
+
+    <!-- Resource style for the popup confirmation box -->
+   <link rel="stylesheet" href="/static/style.css">
+
+    <link rel="stylesheet" href="/static/background.css">
+
+
+
+
+<!-- CSS Styling-->
+    <style>
+
+        ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+        a {
+            text-decoration: none;
+            color: white;
+        }
+
+        a:hover {
+            text-decoration: none;
+            color: white;
+        }
+
+        li {
+            float: left;
+        }
+
+        footer {
+            padding-top: 5%;
+        }
+
+        .singleLineChildren {
+          /* prevents the contents from wrapping to a new line: */
+          white-space: nowrap;
+          /* prevents the overflow being seen/scrolled-to;
+             adjust to taste: */
+          overflow: hidden;
+          /* to emphasize/speed-up the effect: */
+          width: 100%;
+        }
+
+
+        /* FOR ADDING ICONS TO INPUT BOXES, SEARCH BOXES, ETC */
+        /* enable absolute positioning */
+        .inner-addon {
+            position: relative;
+        }
+        /* style icon */
+        .inner-addon .glyphicon {
+          position: absolute;
+          padding: 10px;
+          pointer-events: none;
+        }
+        /* align icon */
+        .left-addon .glyphicon  { left:  0px;}
+        .right-addon .glyphicon { right: 0px;}
+        /* add padding  */
+        .left-addon input  { padding-left:  30px; }
+        .right-addon input { padding-right: 30px; }
+
+
+        .link-color {color:#0382DA;  }
+
+                    a:hover {
+                        text-decoration: none;
+                        color: lightseagreen;
+                    }
+
+
+        .head-style {
+                    font-size: 40px;
+                    padding: 25px;
+                    text-align: center;}
+
+
+        .in_line {
+                    display:inline; }
+
+
+        .toggle-button {
+         position: relative;
+         display: inline-block;
+         color: #fff; }
+         .toggle-button label {
+           display: inline-block;
+           text-transform: uppercase;
+           cursor: pointer;
+           text-align: left; }
+         .toggle-button input {
+           display: none; }
+         .toggle-button__icon {
+           cursor: pointer;
+           pointer-events: none; }
+           .toggle-button__icon:before, .toggle-button__icon:after {
+             content: "";
+             position: absolute;
+             top: 45%;
+             left: 35%;
+             transition: 0.2s ease-out; }
+
+
+        .toggle-button--sade {
+         width: 100px;
+         height: 20px; }
+         .toggle-button--sade label {
+           position: absolute;
+           left: 0;
+           width: 30px;
+           height: 30px;
+           line-height: 30px;
+           transition: all 0.2s;
+           background: #e3e3e3;
+           border-radius: 4px;
+           box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
+           text-shadow: 0 1px 0 rgba(0, 0, 0, 0.1); }
+           .toggle-button--sade label:before, .toggle-button--sade label:after {
+             position: absolute;
+             top: 0;
+             left: 40px;
+             transition: all 0.2s .1s ease-out; }
+           .toggle-button--sade label:before {
+             content: attr(data-on-text); }
+           .toggle-button--sade label:after {
+             content: attr(data-off-text); }
+         .toggle-button--sade input + label:before {
+           opacity: 0;
+           transform: translate(30px, 0); }
+         .toggle-button--sade input + label:after {
+           opacity: 1;
+           transform: translate(0, 0); }
+         .toggle-button--sade input:checked ~ label:before {
+           opacity: 1;
+           transform: translate(0, 0); }
+         .toggle-button--sade input:checked ~ label:after {
+           opacity: 0;
+           transform: translate(30px, 0); }
+         .toggle-button--sade input[type=checkbox]:checked ~ .toggle-button__icon:before, .toggle-button--sade input[type=checkbox]:checked ~ .toggle-button__icon:after {
+           background: #61B136 ; }
+         .toggle-button--sade input[type=checkbox]:checked ~ .toggle-button__icon:before {
+           transform: translate(-30%, 70%) rotate(45deg) scale(0.7, 1); }
+         .toggle-button--sade input[type=checkbox]:checked ~ .toggle-button__icon:after {
+           transform: translate(20%) rotate(-45deg); }
+         .toggle-button--sade .toggle-button__icon {
+           position: absolute;
+           height: 30px;
+           width: 30px;
+           top: 0;
+           left: 0; }
+           .toggle-button--sade .toggle-button__icon:before, .toggle-button--sade .toggle-button__icon:after {
+             width: calc(30px - 15px);
+             height: 3px;
+             border-radius: 3px;
+             background: #fff;
+             box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
+             margin-left: -3px;
+             top: 40%;
+             background: #FF5335; }
+           .toggle-button--sade .toggle-button__icon:before {
+             transform: rotate(45deg); }
+           .toggle-button--sade .toggle-button__icon:after {
+             transform: rotate(-45deg); }
+         .toggle-button--sade:hover label {
+           box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+           text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2); }
+         .toggle-button--sade:hover input[type=checkbox]:not(:checked) ~ .toggle-button__icon:before {
+           animation: icon-hover-before .2s; }
+         .toggle-button--sade:hover input[type=checkbox]:not(:checked) ~ .toggle-button__icon:after {
+           animation: icon-hover-after .2s; }
+
+        @keyframes icon-hover-before {
+         0% {
+           transform: rotate(45deg) scale(1, 1); }
+         100% {
+           transform: rotate(45deg) scale(1.2, 1.2); } }
+
+        @keyframes icon-hover-after {
+         0% {
+           transform: rotate(-45deg) scale(1, 1); }
+         50% {
+           transform: rotate(-45deg) scale(1.2, 1.2); } }
+  .navbar, .navbar-inverse {
+	border-radius: 0;
+	border: none;
+	margin-bottom: 0;
+	min-height: 5%;
+}
+
+.navbar-inverse{
+    background: rgba(0, 0, 0, 0.5);
+    border-color: transparent !important;
+    background-image:none !important;
+
+}
+
+.nav li {
+	display: inline;
+	color: white;
+}
+
+.navbar-inverse .navbar-nav > li > a {
+	color: #ffffff;
+	font-family: Lato;
+	font-size: 1.7em;
+	font-weight: 300;
+	padding: 30px 25px 33px 25px;
+}
+
+.navbar-inverse .navbar-nav li a:hover {
+	background-color: #444444;
+	transition: 0.7s all linear;
+	height: 100%;
+}
+
+
+
+.navbar-brand{
+    float:left
+
+}
+
+.navbar-nav {
+    float: right;
+    margin: 0;
+}
+
+    </style>
+</head>
+<body>
+<nav>
+         <div id="nav" class="navbar navbar-inverse navbar-fixed-top" data-spy="affix">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                  </button>
+                </div>
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
+                    <a class="navbar-brand" style="padding-left:1; padding-top:10" href="{{ url_for('index') }}"><img src="/static/verbo-velocity.png"></a>
+                      <ul class="nav navbar-nav">
+                {% if current_user.name %}
+                    <li class="dropdown">
+                        <li role="presentation" class="dropdown-toggle" data-toggle="dropdown" class="navbar-toggle collapsed" data-target="#bs-example-navbar-collapse-1" aria-expanded="false"><h4><a href="{{ url_for('dashboard') }}"><span class="glyphicon glyphicon-user"></span> Welcome, {{ current_user.name }}  <span class="caret"></span></h4></li></a>
+
+                    <ul class="dropdown-menu" role="menu">
+                          <li style="padding-left: 20px;"><a href="{{ url_for('dashboard') }}"><span class="glyphicon glyphicon-asterisk" aria-hidden="true"></span> Dashboard</a></li>
+                        <li style="padding-left: 20px;"><a href="{{ url_for('user_profile', user_id = current_user.user_id) }}"><span class="glyphicon glyphicon-asterisk" aria-hidden="true"></span> Profile Settings</a></li>
+                        <li style="padding-left: 20px;"><a href="{{ url_for('update_user', user_id = current_user.user_id) }}"><span class="glyphicon glyphicon-asterisk" aria-hidden="true"></span> Update Password</a></li>
+                      </ul>
+                    </li>
+                {% endif %}
+                    {% if current_user.role == 'homegroup_leader' %}
+                        <li><a href="{{ url_for('get_homegroup_members', homegroup_id = current_user.homegroup_id) }}">Members</a></li>
+
+                    {% endif %}
+                    {% if current_user.role == 'admin' %}
+                        <li role="presentation" ><a href="{{ url_for('get_homegroups') }}">Home Groups</a></li>
+                        <li role="presentation" ><a href="{{ url_for('all_members') }}">Members</a></li>
+                    {% endif %}
+                {% if current_user.role == 'homegroup_leader' %}
+                    <li role="presentation" ><a href="{{ url_for('attendance', homegroup_id = current_user.homegroup_id) }}">Attendance</a></li>
+                    <li role="presentation" ><a href="{{ url_for('edit_homegroup', homegroup_id = current_user.homegroup_id) }}">Edit Homegroup</a></li>
+                {% endif %}
+
+                 <li role="presentation"><a class="active" href="{{ url_for('faq')}}">FAQ</a></li>
+                 <li role="presentation"><a href="{{ url_for('contact') }}">Contact</a></li>
+                 {%  if current_user.name %}
+                     <li role="presentation" ><a href="/logout"><b>Log Out</b></a></li>
+                {%  else %}
+                     <li role="presentation" ><a href="/login"><b>Log In</b></a></li>
+                {% endif %}
+
+                </ul>
+        </nav>
+            </div>
+
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-2" style="float:right">
+                         <div id="google_translate_element"></div>
+                            <script type="text/javascript">
+                                function googleTranslateElementInit() {
+                                    new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
+                                }
+                            </script>
+                            <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+                        </div>
+                    </div>
+
+
+              {#  {% if message %}
+                    <p>Note: {{ message }}</p>
+                {% endif %}
+
+                {% with messages = get_flashed_messages() %}
+                    {%  if messages %}
+                        <div class="alert alert-info">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                             <span aria-hidden="true">&times;</span>
+                              </button>
+                            {% for message in get_flashed_messages() %}
+                                {{ message }}
+                            {% endfor %}
+
+                    {% endif %}
+                {% endwith %}#}
+   </div>
+
+    {% block content %}
+    {% endblock %}
+    </main>
+        </div>
+                </div>
+            </div>
+
+
+    </div>
+    <footer>
+    </footer>
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+<link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
+
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+    <!-- Uses jQuery, so load after jQuery -->
+    <script type="text/javascript" src="/static/javascript.js"></script>
+
+
+<script src="/static/main.js"></script> <!-- Resource jQuery for the confirmation popup-->
+
+
+
+</body>
+</html>

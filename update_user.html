@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block title %}Update Password{% endblock %}
+
+{% block content %}
+<style>
+    body, html{
+     height: 100%;
+
+}
+
+    </style>
+    <div class="container">
+			<div class="row main">
+				<div class="main-login main-center">
+                     <h2 class="head-style" > Update Password</h2>
+                            <h3><b>Email:</b> {{ email }}</h3>
+					 <form method = "POST" role="form" data-toggle="validator">
+
+						<div class="form-group">
+							 {{ form.csrf_token }}
+                             <p>{{ form.old_password.label }}{{ form.old_password(class='form-control') }}</p>
+						</div>
+                         <div class="form-group">
+							 <p>{{ form.new_password.label }}{{ form.new_password(class="form-control") }}</p>
+						</div>
+
+                         <div class="form-group">
+							 <p>{{ form.confirm_password.label }}{{ form.confirm_password(class="form-control") }}</p>
+						</div>
+
+						<div class="form-group ">
+                              <p> {{ form.submit(class_='btn btn-primary btn-lg btn-block', style="display: block; width: 100%; font-family: 'Questrial', sans-serif;")}}</p>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+
+{% endblock %}

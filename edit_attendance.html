@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+
+
+{% block title %}Attendance Report{% endblock %}
+
+{% block content %}
+
+
+        <h1 class="head-style">Attendance Report </h1>
+            <h3>Date: {{date}} Time: {{time}}</h3>
+        <br>
+        <form method = "POST" role="form" data-toggle="validator">
+        <div class="form-group">
+        {{ form.csrf_token }}
+        <table class="table table-striped table-bordered table-hover">
+
+
+            <thead>
+            <tr>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Attendance</th>
+
+            </tr>
+            </thead>
+            <tbody>
+            {% for member in members %}
+            <tr>
+
+                <td>{{ member.first_name }}</td>
+                <td>{{ member.last_name }}</td>
+                <td>
+                    {% if member.attendance == 1 %}
+                    <input type="checkbox" name="member_{{member.member_id}}"  value="attend" checked></input>
+                    {%  else %}
+                    <input type="checkbox" name="member_{{member.member_id}}"  value = "attend" ></input>
+                    {% endif %}
+
+{#                    {% if member.attendance == 0: %}#}
+{#                    <a href="{{url_for('updateAttendance', homegroup_id = currentHomegroup, member_id = member.id, meeting_id = meeting_id, attendance = 1)}}"><button class="btn btn-secondary" > &nbsp; &nbsp;  </button></a>#}
+{#                    {% else: %}#}
+{#                    <a href="{{url_for('updateAttendance', homegroup_id = currentHomegroup, member_id = member.id, meeting_id = meeting_id, attendance = 0)}}"><button class="btn btn-secondary" > <span class="glyphicon glyphicon-ok"></span></button></a>#}
+{#                    {% endif %}#}
+
+                </td>
+
+            </tr>
+
+
+
+            {% else %}
+            <tr>
+                <td colspan="4">No Info</td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+                <p>{{ form.submit(class_='btn btn-info btn-lg pull-left') }}</p>
+        </form>
+    <!--<button type="button" onclick="goBack()"  class="btn btn-info btn-lg pull-left"><span class="glyphicon glyphicon-ok"></span>Save</button>-->
+{% endblock %}

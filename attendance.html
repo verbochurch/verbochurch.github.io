@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block title %}Attendance Report{% endblock %}
+
+{% block content %}
+
+
+<div class="container-fluid">
+    <h1 class="head-style">Attendance Report</h1>
+    <hr>
+    <div class="row">
+        <div class="col form-group pull-left">
+            <a href="{{url_for('get_attendance_dates', homegroup_id = currentHomegroup)}}"><button class="btn btn-primary"> <span class="glyphicon glyphicon-time"> </span> View Attendance History</button><br><br></a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col form-group pull-left">
+            <form method = "POST">
+                <span class="col">
+                    <span class="col form-group pull-left counter">
+                        <h4><span class="label label-default">Date</span></h4>
+                    </span>
+                    <span class="col form-group pull-left counter">
+                        <input class="date" type="date" name="AttendanceDate" required/>
+                    </span>
+                    <span class="col form-group pull-left counter">
+                        <h4><span class="label label-default">Time</span></h4>
+                    </span>
+                    <span class="col form-group pull-left counter">
+                        <input class="date counter" type="time" name = "AttendanceTime" required/><br>
+                    </span>
+                </span>
+                <span class="col form-group pull-left counter">
+                    <input type="submit" class="btn btn-info" value="Take Attendance">
+                </span>
+            </form>
+        </div>
+    </div>
+
+
+</div>
+
+{% endblock %}

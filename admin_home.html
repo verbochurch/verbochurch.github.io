@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+
+
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/data.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+<div class="jumbotron">
+<h2 class="head-style"> Attendance Chart</h2>
+</div>
+
+<div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+
+<table id="datatable" hidden>
+    <thead>
+        <tr>
+            <th></th>
+            <th>Date</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for attendance_record in attendance_count %}
+        <tr>
+            <th>{{ attendance_record.date }}</th>
+            <td>{{ attendance_record.countMembers}}</td>
+        </tr>
+        {% endfor %}
+
+    </tbody>
+</table>
+
+
+<script>
+    Highcharts.chart('container', {
+        data: {
+            table: 'datatable'
+        },
+        chart: {
+            type: 'column'
+        },
+        title: {
+            text: 'Total Attendance Counts'
+        },
+        yAxis: {
+            allowDecimals: false,
+            title: {
+                text: 'Attendance Count'
+            }
+        },
+        tooltip: {
+            formatter: function () {
+                return '<b>' + this.series.name + '</b><br/>' +
+                    this.point.y + ' ' + this.point.name.toLowerCase();
+            }
+        }
+    });
+</script>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block title %}Contact{% endblock %}
+
+{% block content %}
+     <div class="container">
+			<div class="row main">
+				<div class="main-login main-center">
+                     <h2 class="head-style" >  Contact Our Support Team</h2>
+					     <form method = "POST" role="form" data-toggle="validator">
+
+						<div class="form-group">
+                                {{ form.csrf_token }}
+                                <p> {{form.name.label}} {{form.name(class_='form-control', placeholder="Name")}}</p>
+                                {% if form.name.errors %}
+                                    <div class="alert alert-warning">
+                                        Please enter first and last name
+                                     </div>
+                                {% endif %}
+						</div>
+
+						<div class="form-group">
+                                <p> {{form.email.label(for="inputEmail", class_="control-label")}} {{form.email(class_='form-control', type="email", id="inputEmail", placeholder="Email", dataerror="Email address is invalid")}}</p>
+                                {% if form.email.errors %}
+                                 <div class="alert alert-warning">
+                                  Invalid Email Address</div>
+                                  {% endif %}
+						</div>
+
+						<div class="form-group">
+                            <p> {{form.message.label}} {{form.message(class_='form-control', placeholder="Message")}}</p>
+                             {% if form.message.errors %}
+                              <div class="alert alert-warning">
+                              Please enter message</div>
+                              {% endif %}
+						</div>
+
+						<div class="form-group ">
+                              <p> {{ form.submit(class_='btn btn-primary btn-lg btn-block', style="display: block; width: 100%; font-family: 'Questrial', sans-serif;")}}</p>
+						</div>
+
+					</form>
+				</div>
+			</div>
+		</div>
+
+
+{% endblock %}

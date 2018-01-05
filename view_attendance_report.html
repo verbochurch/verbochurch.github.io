@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+
+{% block title %}Attendance Report{% endblock %}
+
+{% block content %}
+    <h3><a class="btn btn-default" href="{{url_for('view_attendance', homegroup_id = currentHomegroup)}}"><span class="glyphicon glyphicon-menu-left"></span>Back</a></h3><br>
+
+<table class="table table-striped table-bordered table-hover">
+        <h1>Attendance Report </h1>
+            <h3>Date: {{date}}</h3>
+            <h3>Time: {{time}}</h3>
+        <br>
+
+            <thead>
+            <tr>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Attendance</th>
+
+            </tr>
+            </thead>
+            <tbody>
+            {% for member in members %}
+            <tr>
+
+                <td>{{ member.first_name }}</td>
+                <td>{{ member.last_name }}</td>
+                <td>
+                    {% if member.attendance == 1 %}
+                    <p class="glyphicon glyphicon-ok"></p>
+                    {%  else %}
+                    <p></p>
+                    {% endif %}
+                </td>
+
+            </tr>
+
+            {% else %}
+            <tr>
+                <td colspan="4">No Info</td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+{% endblock %}
